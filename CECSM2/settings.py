@@ -169,9 +169,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'CECSTESTUAZ@gmail.com'
+EMAIL_HOST_USER = os.environ.get('DEFAULT_EMAIL_PASSWORD', '')
 # EMAIL_HOST_PASSWORD = 'Ppkhpa5AkR9x6H'
-EMAIL_HOST_PASSWORD = 'eachrskvxthukahm'
+EMAIL_HOST_PASSWORD = os.environ.get('DEFAULT_EMAIL_PASSWORD', '')
 EMAIL_PORT = '587'
 
 PASSWORD_RESET_TIMEOUT = 86400 # Esto es puesto en segundos, es equivalente a un día.
