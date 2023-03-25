@@ -1,0 +1,70 @@
+name: CECS CI/CD Workflow
+
+on:
+  push:
+    branches: [ main, cicd ]
+  pull_request:
+    branches: [ main, cicd ]
+
+jobs:
+  packages:
+    runs-on: ubuntu-20.04
+    steps:
+      
+      - name: CheckOut latest code
+        uses: actions/checkout@v3
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: 0
+      
+      - name: SetUp Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        uses: BSFishy/pip-action@v1
+        with:
+          requirements: requirements.txt
+      
+      - name: Packages Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashfiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+  tests:
+    runs-on: ubuntu-20.04
+    steps:
+      
+      - name: CheckOut latest code
+        uses: actions/checkout@v3
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: 0
+      
+      - name: SetUp Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Restore packages Cache
+        uses: actions/cache@v3
+        with: 
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashfiles('requirements.txt') }}
+      
+      - name: Run tests
+        env:
+          DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+        run:
+          python manage.py test
