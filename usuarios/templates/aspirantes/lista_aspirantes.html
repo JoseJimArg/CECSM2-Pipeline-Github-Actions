@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block head %}  
+    <title>Lista de Aspirantes</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor contenido" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Aspirantes registrados</h1>
+        </div>
+    </div>
+
+    <div class="form-control form">
+        <form method="get" class="form-group row align-center">
+
+            {% for field in filter.form %}
+                <div class="col col-sm-10 col-md-3">
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <div class="col col-sm-10 col-md-3">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+
+            <div class="col d-flex justify-content-end">
+                <a href="{% url 'usuarios:nuevo_aspirante' %}" class="btn btn-primary">Nuevo</a>
+            </div>
+
+        </form>
+
+        <div class="row mt-5">
+            <div class="col-md-12 ">
+                {% if filter.qs %}
+                <table class="table table-striped" id="lista_alumnos">
+                    <thead>
+                        <tr>
+                            <th>Número de aspirante</th>
+                            <th>Apellidos</th>
+                            <th>Nombre(s)</th>
+                            <th>Correo</th>
+                            <th>Estatus</th>
+                            <th>Usuario</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for aspirante in filter.qs %}
+                        <tr>
+                            <td>{{aspirante.num_aspirante}}</td>
+                            <td>{{aspirante.last_name}}</td>
+                            <td>{{aspirante.first_name}}</td>
+                            <td>{{aspirante.email}}</td>
+                            <td>
+                                {% if aspirante.status == 0 %}
+                                    <i class="fas fa-minus-circle status status-pending"></i>
+                                {% elif aspirante.status == 1 %}
+                                    <i class="fas fa-check-circle status status-success"></i>
+                                {% else %}
+                                    <i class="fas fa-times-circle status status-error"></i>
+                                {% endif %}
+                            </td>
+                            <td>{{aspirante.username}}</td>
+                            <td>
+                                <a href="{% url 'usuarios:ver_aspirante' aspirante.id %}" class="btn btn-primary">
+                                    Ver
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <h2>Sin resultados</h2>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}

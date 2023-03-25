@@ -1,0 +1,15 @@
+[run]
+omit=
+    */test/*
+    *migrations*
+    *__init*
+    *settings*
+    *apps*
+    *wsgi*
+    *admin.py
+    *asgi.py
+    manage.py
+    *urls.py
+    *pruebas_aceptacion/*
+    *urls*
+    *validators*

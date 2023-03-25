@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}   
+    <title>Corrección de documentos</title>
+{% endblock head %}
+
+{% block body %}
+
+    <div class="container contenedor" id="contenedor">
+        <div class="row ">
+            <div class="col-md-12">
+                <h1>Corrección de documentos</h1>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-6 form-container">
+                <form method="post" class="form-control form" id="formulario" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form}}
+                    <br>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Corregir</button>
+                    </div>  
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}

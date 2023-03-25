@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Materias que lleva este alumno</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Docente</th>
+                        <th>Ciclo Escolar</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for clase in clases_lleva %}
+                        <tr>
+                            <td>{{ clase.materia }}</td>
+                            <td>{{ clase.docente }}</td>
+                            <td>{{ clase.ciclo }}</td>
+                            <td>
+                                <button 
+                                    class="btn btn-danger"
+                                    type="button"
+                                    onClick="abrir_modal_eliminar(
+                                        '{% url 'clases:quitar_clase_alumno' alumno.id clase.id %}', 
+                                        '{{clase.materia}}' 
+                                    )"
+                                >
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>

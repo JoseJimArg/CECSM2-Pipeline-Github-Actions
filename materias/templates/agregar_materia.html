@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Nueva Materia</title>
+{% endblock head %}
+    
+
+{% block body %}
+
+    <div class="container contenedor" id="contenedor">
+
+        <div class="row ">
+            <div class="col-md-12">
+                <h1>Registrar materia</h1>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-8 form-container">
+                <form method="post" class="form-signin form-control form" enctype="multipart/form-data">
+                    {{form.errors}}
+                    {% csrf_token %}
+                    <p>
+                        <!-- <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" id="id_nombre_input" placeholder="Nombre de la materia" value="{% if form.nombre.value %}{{ form.nombre.value }}{% endif %}">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea name="descripcion" class="form-control" id="id_descripcion_input" rows="4" cols="50">{% if form.descripcion.value %}{{ form.descripcion.value }}{% endif %}</textarea>
+                        <label for="tipo">Tipo de Materia</label>
+                        <input type="text" name=" value="{% if form.nombre.value %}{{ form.nombre.value }}{% endif %}"> -->
+
+
+                        {{form.nombre.errors}}
+                        {{form.nombre.label_tag}}
+                        {{form.nombre}}
+
+                        {{form.descripcion.errors}}
+                        {{form.descripcion.label_tag}}
+                        {{form.descripcion}}
+
+                        {{form.tipo.errors}}
+                        {{form.tipo.label_tag}}
+                        {{form.tipo}}
+
+
+                    </p>
+
+                    <button id="id_btn_guardar" type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock body %}
+    

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>{{ titulo }}</title>
+{% endblock head %}
+    
+
+{% block body %}
+
+    <div class="container contenedor" id="contenedor">
+        <div class="row ">
+            <div class="col-md-12">
+                <h1>{{ titulo }}</h1>
+            </div>
+        </div>
+        
+        <main class='row'>
+            <div class='col-md-6 form-container'>
+                <form class="form-control form" method='post'>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" id="submit_button" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+{% endblock body %}

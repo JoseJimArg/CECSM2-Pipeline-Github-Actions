@@ -1,0 +1,30 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Docentes que imparten esta materia</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 form-control form">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Matricula</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for docente in docentes %}
+                    <tr>
+                        <td>{{ docente.matricula }}</td>
+                        <td>{{ docente.first_name }}</td>
+                        <td>{{ docente.last_name }}</td>
+                        <td>{{ docente.email }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

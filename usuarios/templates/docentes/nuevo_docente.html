@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Nuevo Docente</title>
+{% endblock head %}
+
+{% block body %}
+
+    <div class="container contenedor" id="contenedor">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Registrar docente</h1>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-6 form-container">
+                <form method="post" id="formulario" class="form-control form">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-primary" id="submit_button">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

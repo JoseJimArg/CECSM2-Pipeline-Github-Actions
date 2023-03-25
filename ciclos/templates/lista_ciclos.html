@@ -1,0 +1,44 @@
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Lista de ciclos</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Tipo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ciclo in ciclos %}
+                        <tr>
+                            <td>{{ ciclo }}</td>
+                            <td>{{ ciclo.anio_inicio }}</td>
+                            <td>{{ ciclo.anio_fin }}</td>
+                            <td>{{ ciclo.tipo_ciclo }}</td>
+                            <td>
+                                
+                                {% if ciclo.activo %}
+                                    <a class="btn btn-success" disabled >
+                                        Activo
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-primary" href="{% url 'ciclos:activar' ciclo.id %}" >
+                                        Activar
+                                    </a>
+                                {% endif %}
+                                    
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>

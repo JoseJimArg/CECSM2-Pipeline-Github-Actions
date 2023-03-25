@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block head %}  
+    <title>Lista de Clases</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Lista de clases</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <div class="d-flex justify-content-end">
+                <form action="{% url 'clases:nueva' %}" method="get">
+                    <button type="submit" class="btn btn-primary">Nueva</button>
+                </form>
+            </div>
+            {% if clases %}
+            <table class="table table-striped" id="lista_alumnos">
+                <thead>
+                    <tr>
+                        <th>Ciclo Escolar</th>
+                        <th>Materia</th>
+                        <th>Docente</th>
+                        <th>Grupo</th>
+                        <th>Cupo total</th>
+                        <th>Cupo restante</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for clase in clases %}
+                    <tr>
+                        <td>{{clase.ciclo}}</td>
+                        <td>{{clase.materia}}</td>
+                        <td>{{clase.docente.first_name}} {{clase.docente.last_name}}</td>
+                        <td>{{clase.grupo}}</td>
+                        <td>{{clase.cupo_total}}</td>
+                        <td>{{clase.cupo_restante}}</td>
+                        <td>
+                            <a href="{% url 'clases:lista_alumnos_de_clase' clase.id %}" type="button" class="btn btn-primary">Ver</a>
+                            <button 
+                                class="btn btn-danger"
+                                type="button"
+                                onClick="abrir_modal_eliminar(
+                                    '{% url 'clases:eliminar_clase' clase.id %}', 
+                                    '{{clase.materia}} {{clase.grupo}} {{clase.ciclo}} impartida por {{clase.docente.first_name}} {{clase.docente.last_name}}' 
+                                )"
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+                <h2>No hay clases registradas.</h2>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+{% include 'modal_eliminar.html' %}
+{% endblock body %}

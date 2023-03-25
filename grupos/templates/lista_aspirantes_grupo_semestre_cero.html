@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}  
+    <title>Lista de Aspirantes</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor contenido" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Aspirantes del grupo {{grupo.letra}}</h1>
+        </div>
+    </div>
+
+    <div class="form-control form">
+        <div class="row mt-5">
+            <div class="col-md-12 ">
+                {% if aspirantes %}
+                <table class="table table-striped" id="lista_alumnos">
+                    <thead>
+                        <tr>
+                            <th>Número de aspirante</th>
+                            <th>Apellidos</th>
+                            <th>Nombre(s)</th>
+                            <th>Correo</th>
+                            <th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for aspirante in aspirantes %}
+                        <tr>
+                            <td>{{aspirante.num_aspirante}}</td>
+                            <td>{{aspirante.last_name}}</td>
+                            <td>{{aspirante.first_name}}</td>
+                            <td>{{aspirante.email}}</td>
+                            <td>{{aspirante.username}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <h2>No hay alumnos inscritos</h2>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}
+
+  

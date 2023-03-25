@@ -1,0 +1,50 @@
+{% extends 'base_logs.html' %}
+
+
+{% block head %}
+    <title>Iniciar Sesi&oacute;n</title>
+{% endblock head %}
+    
+
+{% block body %}
+    {% if form.errors %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        Nombre de usuario o contraseña incorrectos.
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Iniciar sesi&oacute;n</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 form-container">
+            <form method="POST" class="form-control form">
+                {% csrf_token %}
+                <div class="form-group">
+                        <input  required type="text" id="id_username" class="form-control login-input" name="username" placeholder="Nombre de Usuario">
+                        <input  required type="password" id="id_password" class="form-control login-input" name="password" placeholder="Contraseña">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" id="login_button">Iniciar Sesi&oacute;n </button>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <a href="{% url 'usuarios:nuevo_aspirante' %}">¿Eres aspirante? Registrate aquí</a>
+                </div>
+                <br>
+                <div>
+                    <a href="{% url 'calificaciones:consulta' %}">¿Eres alumno? Consulta tus calificaciones aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>  
+
+{% endblock body %}
+
+
+
+

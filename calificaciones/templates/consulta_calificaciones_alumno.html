@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Consulta de Calificaciones</title>
+{% endblock head %}
+    
+{% block body %}
+    <!-- {% include 'message.html' %} -->
+
+    <div class="container contenedor" id="contenedor">
+
+        <div class="row ">
+            <div class="col-md-12">
+                <h1>Consulta de Calificaciones</h1>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-8 form-container">
+                <form method="post" class="form-signin form-control form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>
+                        <label for="nombre">Matricula del Alumno:</label>
+                        <input type="text" name="matricula_alumno" class="form-control" id="id_matricula_alumno" pattern="\d*" minlength="8" maxlength="8" placeholder="Longitud de 8 digitos" required value="{% if matricula_alumno %}{{ matricula_alumno }}{% endif %}">
+                        
+                    </p>
+
+                    <button id="id_btn_guardar" type="submit" class="btn btn-primary">Consultar</button>
+                </form>
+            </div>
+        </div>
+
+        
+        {% if clases and calificaciones %}
+            {% include "lista_calificaciones_alumno.html" %}
+        {% elif consulta %}
+            <h3>No hay calificaciones registradas.</h3>
+        {% endif %}
+        
+    </div>
+
+{% endblock body %}

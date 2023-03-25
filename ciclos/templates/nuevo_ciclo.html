@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>{{ title }}</title>
+{% endblock head %}
+
+{% block body %}
+
+    <div class="container contenedor" id="contenedor">
+        <div class="row ">
+            <div class="col-md-12">
+                <h1>{{ titulo }}</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 form-container">
+                <form method="post" class="form-control form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" id="submit_button" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+        
+        {% if ciclos %}
+            {% include 'lista_ciclos.html' %}
+        {% endif %}
+    </div>
+
+    <br>
+        
+    
+{% endblock body %}
+    
+    

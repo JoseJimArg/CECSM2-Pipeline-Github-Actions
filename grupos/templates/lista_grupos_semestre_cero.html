@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Lista de Grupos Semestre Cero</title>
+{% endblock head %}
+
+
+{% block body %}
+    
+<div class="container contenedor" id="contenedor">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Grupos de Semestre Cero {{ciclo}}</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            {% if grupos %}
+            <table class="table table-striped" id="lista_grupos">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Cupo l&iacute;mite</th>
+                        <th>Cupo restante</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grupo,total,restante in grupos %}
+                    <tr>
+                        <td>{{ grupo.letra }}</td>
+                        <td>{{ total }}</td>
+                        <td>{{ restante }}</td>
+                        <td>
+                            
+                            {% if grupo_inscrito %}
+                                {% if grupo_inscrito.grupo.letra == grupo.letra %}
+                                    <a class="btn btn-success" href="#">
+                                        Inscrito actualmente
+                                    </a>
+                                {% endif %}
+                                {% else %}
+                                <a class="btn btn-success" href="{% url 'usuarios:inscribir' grupo.id %}">
+                                    Inscribirme
+                                </a>
+                            {% endif %}
+                            
+                            <a class="btn btn-primary" href="{% url 'grupos:lista_aspirantes_grupo' grupo.id %}">
+                                Lista de alumnos
+                            </a>
+                            <a class="btn btn-primary" href="{% url 'grupos:lista_clases_grupo' grupo.id %}">
+                                Materia y Profesores
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+            {% else %}
+                <h3>No hay grupos para semestre cero.</h3>
+            {% endif %}
+        </div>
+    </div>
+        
+</div> <!-- Fin container -->
+{% endblock body %}
+    
+    

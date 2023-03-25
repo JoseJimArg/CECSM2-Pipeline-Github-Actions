@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block head %}  
+    <title>Lista de Alumnos</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Alumnos registrados</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <div class="d-flex justify-content-end">
+                <form action="{% url 'usuarios:nuevo_alumno' %}" method="get">
+                    <button type="submit" class="btn btn-primary">Nuevo</button>
+                </form>
+            </div>
+            
+            {% if alumnos %}
+                
+            
+            <table class="table table-striped" id="lista_alumnos">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Apellidos</th>
+                        <th>Nombre(s)</th>
+                        <th>Matr&iacute;cula</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alumno in alumnos %}
+                    <tr>
+                        <td>{{alumno.username}}</td>
+                        <td>{{alumno.last_name}}</td>
+                        <td>{{alumno.first_name}}</td>
+                        <td>{{alumno.matricula}}</td>
+                        <td>{{alumno.email}}</td>
+                        <td>
+                            <a href="{% url 'usuarios:ver_alumno' alumno.id %}" class="btn btn-primary">
+                                Ver
+                            </a>
+                            <a href="{% url 'usuarios:editar_alumno' alumno.id %}" class="btn btn-primary">
+                                Editar
+                            </a>
+                            <a href=" {% url 'clases:agregar_clase_alumno' alumno.id %} " class="btn btn-primary">
+                                Asignar clases
+                            </a>
+                            <button 
+                                class="btn btn-danger"
+                                type="button"
+                                onClick="abrir_modal_eliminar(
+                                    '{% url 'usuarios:eliminar_alumno' alumno.id %}', 
+                                    '{{alumno.first_name}}{{alumno.last_name}} con la matrícula {{alumno.matricula}}' 
+                                )"
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <h2>No hay alumnos registrados</h2>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+{% include 'modal_eliminar.html' %}
+{% endblock body %}

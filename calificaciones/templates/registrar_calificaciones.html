@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <title>Registro Calificaciones</title>
+{% endblock title %}
+
+
+{% block body %}
+    <div class="container" id="contenedor">
+        
+        {% if clase %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Registrar calificaciones para {{ clase.materia }} {{ clase.grupo }} {{ clase.ciclo }}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>{{ parcial.nombre }}</h5>
+                </div>
+            </div>
+        {% else %}
+            <h2>Ocurri&oacute; un error</h2>
+        {% endif %}
+        
+        
+        {% if calificaciones %}
+            {% include 'form_registro_calificaciones.html' %}
+        {% endif %}
+    </div>
+    
+{% endblock body %}
+    
+    

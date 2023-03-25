@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}  
+    <title>Lista de Materias y Profesores</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor contenido" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Materias y Profesores del grupo {{grupo.letra}}</h1>
+        </div>
+    </div>
+
+    <div class="form-control form">
+        <div class="row mt-5">
+            <div class="col-md-12 ">
+                {% if clases %}
+                <table class="table table-striped" id="lista_alumnos">
+                    <thead>
+                        <tr>
+                            <th>Materia</th>
+                            <th>Docente</th>
+                            <th>Ciclo Escolar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for clase in clases %}
+                        <tr>
+                            <td>{{ clase.materia }}</td>
+                            <td>{{ clase.docente }}</td>
+                            <td>{{ clase.ciclo }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <h2>No hay clases en este grupo.</h2>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}
+
+  

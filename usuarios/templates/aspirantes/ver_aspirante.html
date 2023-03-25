@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+    <title>Detalles Aspirante</title>
+{% endblock head %}
+
+
+{% block body %}
+<div class="container contenedor" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Detalles aspirante</h1>
+        </div>
+    </div>
+
+    <div class="col-md-12 form-control form">
+        <div class="row">
+                <div class="col col-sm-12 col-md-6">
+                    <label for="first_name">Nombre</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" value="{{aspirante.first_name}}" disabled title="enter your first name if any.">
+                </div>
+                <div class="col col-sm-12 col-md-6">
+                    <label for="last_name">Apellidos</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" value="{{aspirante.last_name}}" disabled title="enter your last name if any.">
+                </div>
+        </div>
+
+        <div class="row mt-3">
+                <div class="col col-sm-12 col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{aspirante.email}}" disabled title="enter your email.">
+                </div>
+                <div class="col col-sm-12 col-md-6">
+                    <label for="email">Numero de aspirante</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{aspirante.num_aspirante}}" disabled title="enter your email.">
+                </div>
+        </div>
+        
+        <div class="row mt-3">
+                <div class="col col-12">
+                    {% if tipoDocumento == "pdf" %}
+                    <embed src="{{aspirante.comprobante_pago.url}}" type="application/pdf" width="100%" height="600px" id="comprobante_pago"/>
+                    {% elif tipoDocumento == "jpg" or tipoDocumento == "png" %}
+                    <img src="{{aspirante.comprobante_pago.url}}" alt="comprobante_pago">
+                    {% else %}
+                    Formato no admitido, favor de solicitar al aspirante que suba el formato correcto
+                    {% endif %}
+                </div>
+        </div>
+        
+        <div class="row mt-3">
+                <div class="col">
+                    {% if aspirante.is_active == 0 %}
+                    <a href="{% url 'usuarios:aceptar_aspirante' aspirante.id %}">
+                        <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Aceptar</button>
+                    </a>
+                    <a href="{% url 'usuarios:notificar_comprobante_erroneo' aspirante.id %}">
+                        <button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Notificar comprobante de pago erróneo</button>
+                    </a>
+                    
+                    {% else %}
+                    <a href="{% url 'usuarios:rechazar_aspirante' aspirante.id %}">
+                        <button class="btn btn-danger" type="submit"><i class="glyphicon glyphicon-remove"></i>Rechazar</button>
+                    </a>
+                    {% endif %}
+                    <button 
+                        class="btn btn-danger"
+                        type="button"
+                        onClick="abrir_modal_eliminar(
+                            '{% url 'usuarios:eliminar_aspirante' aspirante.id %}', 
+                            '{{aspirante.first_name}} {{aspirante.last_name}} con el número de aspirante {{aspirante.num_aspirante}}' 
+                        )"
+                    >
+                        Eliminar
+                    </button>
+                </div>
+        </div>
+
+    </div>
+</div>
+
+{% include 'modal_eliminar.html' %}
+{% endblock body %}
+
+    
+    

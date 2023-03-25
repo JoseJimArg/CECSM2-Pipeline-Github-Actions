@@ -1,0 +1,35 @@
+<div class="container contenedor mt-5" id="contenedor">
+
+    {% if materias %}    
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <div class="row ">
+                <div class="col-md-12">
+                    <h3>Materias que imparte</h3>
+                </div>
+            </div>
+            <table class="table table-striped" id="lista_alumnos">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for materia in materias %}
+                    <tr>
+                        <td>{{materia.nombre}}</td>
+                        <td>{{materia.tipo}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+                <h3>No tiene materia asignadas</h3>
+            {% endif %}
+        </div>
+    </div>
+
+</div>

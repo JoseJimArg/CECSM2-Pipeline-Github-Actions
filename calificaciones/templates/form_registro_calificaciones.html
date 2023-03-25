@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <form method="POST" class="form-control form">
+            {% csrf_token %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Calificación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for llave, alumno in calificaciones.items %}
+                        <tr>
+                            <td>{{ alumno.first_name }}</td>
+                            <td>{{ alumno.last_name }}</td>
+                            <td>
+                                <input type="number" name="{{ alumno.id }}" class="form-control" id="{{ alumno.first_name }}{{ alumno.last_name }}" min="5" max="10" step="0.1" value="{{alumno.calificacion}}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary" id="submit_button">Registrar</button>
+        </form>
+        
+    </div>
+</div>

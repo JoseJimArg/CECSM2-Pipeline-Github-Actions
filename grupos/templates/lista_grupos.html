@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Lista de Grupos</title>
+{% endblock head %}
+
+
+{% block body %}
+    
+<div class="container contenedor" id="contenedor">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Lista de grupos</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <div class="d-flex justify-content-end">
+                <a type="button" id="nuevo_grupo" class="btn btn-primary" href=" {% url 'grupos:nuevo_grupo' %} ">
+                    Nuevo
+                </a>
+            </div>
+            {% if grupos %}
+            <table class="table table-striped" id="lista_grupos">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grupo in grupos %}
+                    <tr>
+                        <td>{{ grupo }}</td>
+                        <td>
+                            <a class="btn btn-primary" id="editar-{{ grupo.semestre }}{{ grupo.letra }}" href="{% url 'grupos:editar_grupo' grupo.id %}">
+                                Editar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+            {% else %}
+            <h3>No hay grupos agregados</h3>
+            {% endif %}
+        </div>
+    </div>
+    
+</div> <!-- Fin container -->
+{% endblock body %}
+    
+    

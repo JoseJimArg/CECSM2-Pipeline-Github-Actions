@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Calificaciones de {{ alumno }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 form-control form">
+        <table name="tabla_calificaciones" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Ciclo</th>
+                    <th>Calificaciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for clase in clases %}
+                    <tr>
+                        <td>{{ clase.materia }}</td>
+                        <td>{{ clase.ciclo }}</td>
+                        <td>
+                        {% for calificaciones_clase in calificaciones %}
+                            <table>
+                                {% for calificacion in calificaciones_clase %}
+                                    {% if clase == calificacion.clase %}
+                                        <tr>
+                                            <td>
+                                            {{ calificacion.tipo }} 
+                                            {{ calificacion.calificacion }}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

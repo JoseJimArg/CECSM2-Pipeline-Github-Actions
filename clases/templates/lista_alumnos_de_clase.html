@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}  
+    <title>Lista de Alumnos</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>{{clase.materia}} {{clase.grupo}} {{clase.ciclo}}</h1>
+        </div>
+    </div>
+
+    {% if alumnos %}
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <h3>Alumnos inscritos</h3>
+            <div class="d-flex justify-content-end">
+                <form action="{% url 'usuarios:nuevo_alumno' %}" method="get">
+                    <button type="submit" class="btn btn-primary">Nuevo</button>
+                </form>
+            </div>
+            
+            <table class="table table-striped" id="lista_alumnos">
+                <thead>
+                    <tr>
+                        <th>Apellidos</th>
+                        <th>Nombre(s)</th>
+                        <th>Matr&iacute;cula</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alumno in alumnos %}
+                    <tr>
+                        <td>{{alumno.last_name}}</td>
+                        <td>{{alumno.first_name}}</td>
+                        <td>{{alumno.matricula}}</td>
+                        <td>{{alumno.email}}</td>
+                        <td>
+                            <a href="#" class="btn btn-primary">
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+        <h3>No hay alumnos inscritos</h3>
+    {% endif %}
+
+</div>
+
+{% include 'modal_eliminar.html' %}
+{% endblock body %}

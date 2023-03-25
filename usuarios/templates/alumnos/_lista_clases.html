@@ -1,0 +1,40 @@
+<div class="container contenedor mt-5" id="contenedor">
+
+    {% if clases %}
+    
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <div class="row ">
+                <div class="col-md-12">
+                    <h3>Clases registradas</h3>
+                </div>
+            </div>
+            <table class="table table-striped" id="lista_alumnos">
+                <thead>
+                    <tr>
+                        <th>Ciclo Escolar</th>
+                        <th>Materia</th>
+                        <th>Docente</th>
+                        <th>Grupo</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for clase in clases %}
+                    <tr>
+                        <td>{{clase.ciclo}}</td>
+                        <td>{{clase.materia}}</td>
+                        <td>{{clase.docente.first_name}} {{clase.docente.last_name}}</td>
+                        <td>{{clase.grupo}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+                <h3>No tiene clases registradas</h3>
+            {% endif %}
+        </div>
+    </div>
+
+</div>

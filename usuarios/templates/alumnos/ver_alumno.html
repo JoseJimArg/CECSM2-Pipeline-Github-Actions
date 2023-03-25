@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+    <title>Detalles Alumnos</title>
+{% endblock head %}
+
+
+{% block body %}
+<div class="container contenedor" id="contenedor">
+
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Detalles alumno</h1>
+        </div>
+    </div>
+
+    <div class="col-md-12 form-control form">
+        <div class="row">
+                <div class="col col-sm-12 col-md-6">
+                    <label for="first_name">Nombre</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" value="{{alumno.first_name}}" disabled title="enter your first name if any.">
+                </div>
+                <div class="col col-sm-12 col-md-6">
+                    <label for="last_name">Apellidos</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" value="{{alumno.last_name}}" disabled title="enter your last name if any.">
+                </div>
+        </div>
+
+        <div class="row mt-3">
+                <div class="col col-sm-12 col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{alumno.email}}" disabled title="enter your email.">
+                </div>
+                <div class="col col-sm-12 col-md-6">
+                    <label for="email">Matrícula</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{alumno.matricula}}" disabled title="enter your email.">
+                </div>
+        </div>
+
+    </div>
+</div>
+
+{% include 'alumnos/_lista_clases.html' %}
+
+{% endblock body %}

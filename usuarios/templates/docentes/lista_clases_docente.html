@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}   
+    <title>Lista de clases</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor" id="contenedor">
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Clases
+            {% if docente %} de {{ docente.first_name }} {{ docente.last_name }}{% endif %}</h1>
+        </div>
+    </div>
+
+    
+    {% if clases %}
+        
+    <div class="row ">
+        <div class="col-md-12 form-control form">
+            <table class="table table-striped" id="lista_clases_docente">
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Ciclo</th>
+                        <th>Asignar calificaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for clase in clases %}
+                    <tr>
+                        <td>{{clase.materia}}</td>
+                        <td>{{clase.ciclo}}</td>
+                        <td>
+                            <a href="{% url 'calificaciones:registrar' clase.id primer_parcial.id %}" class="btn btn-primary">Primer Parcial</a>
+                            <a href="{% url 'calificaciones:registrar' clase.id segundo_parcial.id %}" class="btn btn-primary">Segundo Parcial</a>
+                            <a href="{% url 'calificaciones:registrar' clase.id tercer_parcial.id %}" class="btn btn-primary">Tercer Parcial</a>
+                            <a href="{% url 'calificaciones:registrar' clase.id ordinario.id %}" class="btn btn-primary">Ordinario</a>
+                            <a href="{% url 'calificaciones:registrar' clase.id extraordinario.id %}" class="btn btn-primary">Extraordinario</a>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="row ">
+        <div class="col-md-12">
+            <h3>Este usuario no tiene clases asignadas.</h3>
+        </div>
+    </div>
+    {% endif %}
+        
+
+    
+</div>
+{% endblock body %}

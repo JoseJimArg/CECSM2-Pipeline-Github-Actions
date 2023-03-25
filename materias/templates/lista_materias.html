@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Lista Materias</title>
+{% endblock head %}
+
+
+{% block body %}
+    
+<div class="container contenedor" id="contenedor">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Lista de materias</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 form-control form">
+            <div class="d-flex justify-content-end">
+                <a href=" {% url 'materias:agregar' %} " id="agregar_materia" class="btn btn-primary">Nueva</a>
+            </div>
+                {% if materias %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Materia</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for materia in materias %}
+                        <tr>
+                            <td>{{ materia }}</td>
+                            <td>
+                                <a type="button" class="btn btn-primary" href=" {% url 'materias:editar' materia.id %} ">
+                                    Editar
+                                </a>
+                                <a type="button" class="btn btn-primary" href=" {% url 'materias:agregar_docente' materia.id %} " id="relacionar_docente_{{materia.nombre}}">
+                                    Asignar docentes
+                                </a>
+                                <button 
+                                    class="btn btn-danger"
+                                    type="button"
+                                    onClick="abrir_modal_eliminar(
+                                        '{% url 'materias:eliminar' materia.id %}', 
+                                        '{{materia.nombre}}' 
+                                    )"
+                                >
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+                {% else %}
+                    <h3>No hay materias registradas en el sistma.</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- Fin container -->
+
+{% include 'modal_eliminar.html' %}
+{% endblock body %}

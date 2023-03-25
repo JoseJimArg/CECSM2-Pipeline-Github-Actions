@@ -1,0 +1,121 @@
+
+:root {
+    --color-primary: rgb(21, 84, 165);
+    --color-fondo-body: rgb(245, 245, 245);
+    --color-secondary: rgb(235, 183, 15);
+    --color-warning: rgb(185, 145, 13);
+    --color-error: rgb(167, 28, 18);
+    --color-error-lighter: rgb(255, 226, 224);
+    --color-success: rgb(48, 161, 37);
+}
+
+.navbar {
+    background-color: var(--color-primary);
+}
+
+.navbar-logo {
+    max-height: 3.5em;
+}
+
+.contenido {
+    min-height: 80vh;
+}
+
+body {
+    font-family: "Helvetica Neue", Roboto, sans-serif;
+    background-color: var(--color-fondo-body);
+    font-size: 16px;   
+}
+
+a {
+    text-decoration: none;
+}
+
+
+h1 {
+    margin: 30px 0 30px 0;
+    text-align: center;
+}
+
+h2 {
+    margin: 30px 0 30px 0;
+    text-align: center;
+}
+
+h3 {
+    margin: 10px 0 10px 0;
+    text-align: center;
+}
+
+.form {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.login-input {
+    margin-bottom: 20px;
+}
+
+.helptext {
+    color: var(--color-warning);
+}
+
+.errorlist {
+    background-color: var(--color-error-lighter);
+    color: var(--color-error);
+    list-style-type: none;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.status {
+    font-size: 2rem;
+}
+
+.status-pending {
+    color: var(--color-secondary);
+}
+
+.status-error {
+    color: var(--color-error);
+}
+
+.status-success {
+    color: var(--color-success);
+}
+
+footer {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+footer h2 {
+    color: var(--color-secondary);
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
+footer a:hover {
+    color: var(--color-secondary);
+}
+
+.img-footer {
+    max-height: 8em;
+}
+
+/*----- Buttons ------*/
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}

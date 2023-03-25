@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}   
+    <title>Lista de docentes</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="container contenedor" id="contenedor">
+    <div class="row ">
+        <div class="col-md-12">
+            <h1>Docentes registrados</h1>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col-md-12 form-control form">
+            <div class="d-flex justify-content-end">
+                <form action="{% url 'usuarios:nuevo_docente' %}" method="get">
+                    <button type="submit" class="btn btn-primary">Nuevo</button>
+                </form>
+            </div>
+            <table class="table table-striped" id="lista_docentes">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Matr&iacute;cula</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for docente in docentes %}
+                    <tr>
+                        <td>{{docente.username}}</td>
+                        <td>{{docente.first_name}} {{docente.last_name}}</td>
+                        <td>{{docente.matricula}}</td>
+                        <td>
+                            <a href="{% url 'usuarios:ver_docente' docente.id %}" class="btn btn-primary">
+                                Ver
+                            </a>
+                            <a href="{% url 'usuarios:editar' docente.id %}" class="btn btn-primary">
+                                Editar
+                            </a>
+                            <button 
+                                class="btn btn-danger"
+                                type="button"
+                                onClick="abrir_modal_eliminar(
+                                    '{% url 'usuarios:eliminar_docente' docente.id %}', 
+                                    '{{docente.first_name}} {{docente.last_name}}' 
+                                )"
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+{% include 'modal_eliminar.html' %}
+{% endblock body %}

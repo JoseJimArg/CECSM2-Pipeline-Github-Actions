@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/autocomplete.css' %}"/>
+{% endblock css %}
+
+
+{% block body %}
+    <div class="container contenedor" id="contenedor">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Asignar docente a {{ materia }}</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 form-container">
+                <form method="post" class="form-control form busqueda">
+                    {% csrf_token %}
+                    <div id="autocomplete" class="autocomplete input-group">
+                        <input placeholder="Matrícula" class="autocomplete-input form-control" id="matricula_input" name="matricula_input"/>
+                        <ul class="autocomplete-result-list"></ul>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary" id="submit_button">Agregar</button>
+                        </div>
+                        <div id="form-group">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% if docentes %}
+            {% include 'lista_docentes.html' %}
+        {% endif %}
+
+    </div>     
+{% endblock body %}
+    
+
+{% block script %}
+<script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+<script src="{% static 'js/autocomplete.js' %}"></script>
+
+{% endblock script %}

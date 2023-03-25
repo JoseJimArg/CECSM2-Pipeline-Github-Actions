@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Editar Materia</title>
+{% endblock head %}
+    
+
+{% block body %}
+    <div class="container contenedor" id="contenedor">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Editar materia</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 form-container">
+                <form method="post" class="form-signin form-control form" enctype="multipart/form-data">
+                    {{form.errors}}
+                    {% csrf_token %}
+                    <p>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="id_nombre_input" disabled class="form-control" placeholder="Nombre de la materia" value="{{ nombre }}">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea class="form-control" name="descripcion" id="id_descripcion_input" rows="4" cols="50"></textarea>
+                    </p>
+                    <button id="id_btn_guardar" class="btn btn-primary" type="submit">Guardar</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+{% endblock body %}
